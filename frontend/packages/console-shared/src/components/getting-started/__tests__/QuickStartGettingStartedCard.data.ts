@@ -223,6 +223,18 @@ export const loadedQuickStarts: QuickStart[] = [
       introduction:
         'Red Hat OpenShift Container Storage is persistent software-defined storage integrated with and optimized for Red Hat OpenShift Container Platform. Dynamic, stateful, and highly available container-native storage can be provisioned and de-provisioned on demand as an integral part of the OpenShift administrator console.',
       nextQuickStart: ['getting-started-ocs'],
+      accessReviewResources: [
+        {
+          group: 'operators.coreos.com',
+          resource: 'operatorgroups',
+          verb: 'list',
+        },
+        {
+          group: 'packages.operators.coreos.com',
+          resource: 'packagemanifests',
+          verb: 'list',
+        },
+      ],
       tasks: [],
     },
   },
