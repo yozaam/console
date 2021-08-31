@@ -2,6 +2,7 @@ import * as React from 'react';
 import { FormikProps } from 'formik';
 import * as _ from 'lodash';
 import { useTranslation } from 'react-i18next';
+import { history } from '@console/internal/components/utils';
 import {
   FlexForm,
   FormBody,
@@ -49,8 +50,6 @@ const BuildConfigForm: React.FC<FormikProps<BuildConfigFormikValues> & {
     <YAMLEditorField name="yamlData" model={BuildConfigModel} onSave={handleSubmit} />
   );
 
-  const LAST_VIEWED_EDITOR_TYPE_USERSETTING_KEY = 'devconsole.buildConfigForm.editor.lastView';
-
   const sanitizeToForm = (yamlbuildConfig: BuildConfig) =>
     convertBuildConfigToFormData(yamlbuildConfig, values).formData;
 
@@ -68,6 +67,7 @@ const BuildConfigForm: React.FC<FormikProps<BuildConfigFormikValues> & {
     }
     setFieldValue('yamlData', safeJSToYAML(watchedBuildConfig, '', { skipInvalid: true }), false);
     setFieldValue('resourceVersion', watchedBuildConfig?.metadata?.resourceVersion, true);
+    history.go(0);
   }, [setErrors, setFieldValue, setStatus, values, watchedBuildConfig]);
 
   return (
@@ -86,7 +86,6 @@ const BuildConfigForm: React.FC<FormikProps<BuildConfigFormikValues> & {
             editor: yamlEditor,
             sanitizeTo: sanitizeToYaml,
           }}
-          lastViewUserSettingKey={LAST_VIEWED_EDITOR_TYPE_USERSETTING_KEY}
           noMargin
         />
       </FormBody>
